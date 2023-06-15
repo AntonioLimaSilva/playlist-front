@@ -33,7 +33,7 @@ export class PlaylistAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  addMoreEmail(index: number) {
+  addMoreSongOrRemove(index: number) {
     if (index == 0) {
       this.songs.push(this.fb.group({
         title: ['', [Validators.required]],

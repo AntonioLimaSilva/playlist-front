@@ -16,22 +16,15 @@
   <table>
     <thead class="thead-light">
       <tr>
-        <th>
-          Titulo
-        </th>
-        <th>
-          Artista
-        </th>
-        <th>
-          Ano
-        </th>
-        <th>
-          Genero
-        </th>
+        <th>Titulo</th>
+        <th>Artista</th>
+        <th>Ano</th>
+        <th>Genero</th>
+        <th>Acoes</th>
       </tr>
     </thead>
     <tbody>
-      <tr formArrayName="songs" *ngFor="let song of songs.controls; let i=index">
+      <tr formArrayName="songs" *ngFor="let song of songs.controls; index as i">
         <ng-container [formGroupName]="i">
           <td>
             <input type="text" name="title" formControlName="title">
@@ -46,7 +39,8 @@
             <input type="text" name="gender" formControlName="gender">
           </td>
           <td>
-            <button type="button" (click)="addMoreEmail(i)" [hidden]="i!=0">ADD</button>
+            <button type="button" (click)="addMoreSongOrRemove(i)" *ngIf="i==0" style="width: 100%; color: green">ADD</button>
+            <button type="button" (click)="addMoreSongOrRemove(i)" *ngIf="i!=0" style="width: 100%; color: red">Excluir</button>
           </td>
         </ng-container>
       </tr>
