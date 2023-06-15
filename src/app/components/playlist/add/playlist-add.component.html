@@ -1,0 +1,60 @@
+<div class="form-playlist">
+
+
+<form autocomplete="off" [formGroup]="playlistForm" (submit)="submitPlaylist()">
+
+  <h1>Cadastre sua playlist favorita.</h1>
+
+  <label>Nome: </label>
+  <input type="text" name="name" formControlName="name">
+
+  <label>Descrição: </label>
+  <input type="text" name="name" formControlName="description">
+
+  <h2>Adicione sua lista de músicas.</h2>
+
+  <table>
+    <thead class="thead-light">
+      <tr>
+        <th>
+          Titulo
+        </th>
+        <th>
+          Artista
+        </th>
+        <th>
+          Ano
+        </th>
+        <th>
+          Genero
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr formArrayName="songs" *ngFor="let song of songs.controls; let i=index">
+        <ng-container [formGroupName]="i">
+          <td>
+            <input type="text" name="title" formControlName="title">
+          </td>
+          <td>
+            <input type="text" name="artist" formControlName="artist">
+          </td>
+          <td>
+            <input type="text" maxlength="4" size="4" name="year" formControlName="year">
+          </td>
+          <td>
+            <input type="text" name="gender" formControlName="gender">
+          </td>
+          <td>
+            <button type="button" (click)="addMoreEmail(i)" [hidden]="i!=0">ADD</button>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <button type="submit" [disabled]="playlistForm.invalid">Gravar</button>
+  <button type="button" [routerLink]="['/playlist-all']">Ir para pesquisa</button>
+
+</form>
+</div>

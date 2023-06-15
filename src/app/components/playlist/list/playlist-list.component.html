@@ -1,0 +1,28 @@
+<h1>Lista de playlists</h1>
+<div class="table-playlist">
+  <label>Pesquisar</label>
+  <input type="text" (change)="findByNameOrAll($event)">
+
+  <hr>
+
+  <table style="width: 100%">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Descrição</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let play of playlists">
+      <td>{{ play.name }}</td>
+      <td>{{ play.description }}</td>
+      <td>
+        <button style="text-align: center" type="button" (click)="remove(play)">Excluir</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <br>
+  <button type="button" [routerLink]="['/playlist']">Voltar</button>
+</div>

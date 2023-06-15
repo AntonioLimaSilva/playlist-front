@@ -1,0 +1,35 @@
+<h1>login</h1>
+<form *ngIf="enableCadastroUsuario" autocomplete="off" [formGroup]="loginNewUserForm" (submit)="signup()">
+
+  <label>Primeiro nome: </label>
+  <input type="text" name="firstName" formControlName="firstName">
+  <br>
+
+  <label>Segundo nome: </label>
+  <input type="text" name="lastName" formControlName="lastName">
+  <br>
+
+  <label>Email: </label>
+  <input type="email" name="email" formControlName="email">
+  <br>
+  <label>Passeord: </label>
+  <input type="password" name="name" formControlName="password">
+
+  <button type="submit" class="btn btn-default" [disabled]="loginNewUserForm.invalid">Submit</button>
+</form>
+
+<form *ngIf="!enableCadastroUsuario" autocomplete="off" [formGroup]="loginForm" (submit)="signin()">
+
+  <span *ngIf="errorUserLogin" style="color: red">Login/password não confere.</span>
+  <br>
+
+  <label>Email: </label>
+  <input type="email" name="email" formControlName="email">
+  <br>
+  <label>Passeord: </label>
+  <input type="password" name="name" formControlName="password">
+
+  <button type="submit" class="btn btn-default" [disabled]="loginForm.invalid">Submit</button>
+</form>
+
+<button type="submit" class="btn btn-default" (click)="cadastraAgora()">Cadastre-se agora</button>

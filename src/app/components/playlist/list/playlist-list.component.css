@@ -1,0 +1,14 @@
+body {
+  margin: 0;
+  padding: 2rem;
+}
+
+.form-playlist, .table-playlist {
+  display: inline-block;
+  height: 200px;
+  width: 630px;
+}
+
+table, th, td {
+  border: 1px solid;
+}
