@@ -11,26 +11,10 @@ export class PlaylistAddComponent implements OnInit {
 
   playlistForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private playlistService: PlaylistService) {
-
-    this.playlistForm = this.fb.group({
-      id: [''],
-      name: ['', Validators.compose(
-        [Validators.required, Validators.minLength(2), Validators.maxLength(40)])],
-      description: ['', Validators.compose(
-        [Validators.required, Validators.minLength(2), Validators.maxLength(40)])],
-      songs: this.fb.array([
-        this.fb.group({
-          title: ['', [Validators.required]],
-          artist: ['', [Validators.required]],
-          year: ['', [Validators.required]],
-          gender: ['', [Validators.required]]
-        })
-      ]),
-    });
-  }
+  constructor(private fb: FormBuilder, private playlistService: PlaylistService) {}
 
   ngOnInit(): void {
+    this.createNewForm();
   }
 
   addMoreSongOrRemove(index: number) {
@@ -47,14 +31,31 @@ export class PlaylistAddComponent implements OnInit {
   }
 
   submitPlaylist(): void {
-    this.playlistService.add(this.playlistForm.value).subscribe((resp: any) => {
-      this.playlistForm.reset()
+    this.playlistService.add(this.playlistForm.value).subscribe((_) => {
+      this.createNewForm();
     })
-
   }
 
   get songs() {
     return this.playlistForm.get('songs') as FormArray;
+  }
+
+  private createNewForm() {
+    this.playlistForm = this.fb.group({
+      id: [''],
+      name: ['', Validators.compose(
+        [Validators.required, Validators.minLength(2), Validators.maxLength(40)])],
+      description: ['', Validators.compose(
+        [Validators.required, Validators.minLength(2), Validators.maxLength(40)])],
+      songs: this.fb.array([
+        this.fb.group({
+          title: ['', [Validators.required]],
+          artist: ['', [Validators.required]],
+          year: ['', [Validators.required]],
+          gender: ['', [Validators.required]]
+        })
+      ]),
+    });
   }
 
 }
